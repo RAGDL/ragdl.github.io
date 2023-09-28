@@ -8,7 +8,6 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
   <link rel="icon" href="favicon.ico" />
-  <script src="https://apis.google.com/js/api.js"></script>
 </head>
 
 <body>
@@ -70,48 +69,52 @@
 
         <div id="video-thumbnails">
           <!-- Les miniatures des vidéos iront ici -->
-      </div>
+        </div>
 
-      <script>
-        // Remplacez 'VOTRE_CLE_API' par votre clé d'API YouTube.
-        const API_KEY = 'AIzaSyAsqOr0L2sHjJ9WDv8v6FoA3Bfvply7slo';
-        const PLAYLIST_ID = 'PLUM5kwJunyxMPRwKupWf4G37172P-sUnn';
-    
-        // Fonction pour charger les vidéos de la playlist.
-        function loadPlaylistVideos() {
-            gapi.client.init({
-                apiKey: API_KEY,
-            }).then(function () {
-                return gapi.client.youtube.playlistItems.list({
-                    part: 'snippet',
-                    maxResults: 10, // Nombre de vidéos à afficher.
-                    playlistId: PLAYLIST_ID,
-                });
-            }).then(function (response) {
-                const videos = response.result.items;
-                const videoThumbnails = document.getElementById('video-thumbnails');
-    
-                videos.forEach(function (video) {
-                    const videoTitle = video.snippet.title;
-                    const videoId = video.snippet.resourceId.videoId;
-                    const thumbnailUrl = video.snippet.thumbnails.medium.url;
-    
-                    // Créer une miniature pour chaque vidéo.
-                    const videoThumbnail = document.createElement('div');
-                    videoThumbnail.innerHTML = `
-                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
-                            <img src="${thumbnailUrl}" alt="${videoTitle}">
-                        </a>
-                    `;
-    
-                    videoThumbnails.appendChild(videoThumbnail);
-                });
-            });
-        }
-    
-        // Charger l'API YouTube Data v3.
-        gapi.load('client', loadPlaylistVideos);
-    </script>
+        <script>
+          // Remplacez 'VOTRE_CLE_API' par votre clé d'API YouTube.
+          const API_KEY = 'AIzaSyAsqOr0L2sHjJ9WDv8v6FoA3Bfvply7slo';
+          const PLAYLIST_ID = 'PLUM5kwJunyxMPRwKupWf4G37172P-sUnn';
+  
+          // Fonction pour charger les vidéos de la playlist.
+          function loadPlaylistVideos() {
+              gapi.client.init({
+                  apiKey: API_KEY,
+              }).then(function () {
+                  return gapi.client.youtube.playlistItems.list({
+                      part: 'snippet',
+                      maxResults: 10, // Nombre de vidéos à afficher.
+                      playlistId: PLAYLIST_ID,
+                  });
+              }).then(function (response) {
+                  const videos = response.result.items;
+                  const videoThumbnails = document.getElementById('video-thumbnails');
+  
+                  videos.forEach(function (video) {
+                      const videoTitle = video.snippet.title;
+                      const videoId = video.snippet.resourceId.videoId;
+                      const thumbnailUrl = video.snippet.thumbnails.medium.url;
+  
+                      // Créer une miniature pour chaque vidéo.
+                      const videoThumbnail = document.createElement('div');
+                      videoThumbnail.innerHTML = `
+                          <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+                              <img src="${thumbnailUrl}" alt="${videoTitle}">
+                          </a>
+                      `;
+  
+                      videoThumbnails.appendChild(videoThumbnail);
+                  });
+              });
+          }
+  
+          // Charger l'API YouTube Data v3.
+          gapi.load('client', loadPlaylistVideos);
+      </script>
+  
+      <!-- Charger l'API YouTube Data v3 -->
+      <script src="https://apis.google.com/js/api.js"></script>
+
 
       </div>
     </div>
